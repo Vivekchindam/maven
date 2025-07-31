@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/java-maven-hello.git'
+                git url: 'https://github.com/Vivekchindam/maven.git', credentialsId: 'github-pat'
             }
         }
 
