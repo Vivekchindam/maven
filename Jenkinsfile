@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.9.6'  // Set this in Jenkins -> Global Tool Configuration
-    }
-
+    maven 'maven_3.9.6'  // CORRECT name, matches Jenkins config
+        }
     stages {
         stage('Checkout') {
             steps {
