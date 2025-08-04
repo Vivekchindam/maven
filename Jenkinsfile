@@ -1,52 +1,24 @@
 pipeline {
     agent any
-
     tools {
-    maven 'maven_3.9.6'  // CORRECT name, matches Jenkins config
-        }
+        maven 'MAVEN_HOME' // Configure Maven in Jenkins Global Tools
+        jdk 'JDK11'         // Configure JDK in Jenkins Global Tools
+    }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/java-maven-hello.git'
+                git 'https://github.com/Vivekchindam/maven-java-app.git'
             }
         }
-
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean install'
             }
         }
-
-        stage('Test') {
+        stage('Run') {
             steps {
-                sh 'mvn test'
+                sh 'java -cp target/java-maven-hello-1.0-SNAPSHOT.jar com.example.HelloWorld'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-
-        stage('Package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-
-        stage('Archive') {
-            steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Build and test succeeded.'
-        }
-        failure {
-            echo '❌ Build or tests failed.'
         }
     }
 }
