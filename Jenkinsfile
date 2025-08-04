@@ -1,13 +1,13 @@
 pipeline {
     agent any
     tools {
-        maven 'MAVEN_HOME' // Configure Maven in Jenkins Global Tools
+        maven 'maven_3.9.6' // Configure Maven in Jenkins Global Tools
         jdk 'JDK11'         // Configure JDK in Jenkins Global Tools
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Vivekchindam/maven-java-app.git'
+                git 'https://github.com/Vivekchindam/maven.git'
             }
         }
         stage('Build') {
